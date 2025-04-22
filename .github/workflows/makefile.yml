@@ -18,7 +18,7 @@ jobs:
       - name: Checkout chirpstack-gateway-os
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recusive
           
       - name: Initialize submodules
         run: git submodule update --init --recursive
@@ -45,6 +45,6 @@ jobs:
             gettext libncurses-dev libssl-dev rsync unzip zlib1g-dev file
 
       - name: Init build system
-        run: make 
+        run: make init
 
 
