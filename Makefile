@@ -10,8 +10,8 @@ init:
 	git submodule init
 	git submodule update
 	cp feeds.conf.default openwrt/feeds.conf.default
-	ln -s ../conf/.config openwrt/.config
-	ln -s ../conf/files openwrt/files
+	ln -sf ../conf/.config openwrt/.config
+	ln -sf ../conf/files openwrt/files
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds update -a
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds install -a
 	docker compose run --rm chirpstack-gateway-os quilt init
