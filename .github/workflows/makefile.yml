@@ -20,6 +20,12 @@ jobs:
         with:
           submodules: true # Initialize and update submodules
 
+      # Ensure necessary directories exist and set permissions
+      - name: Prepare OpenWrt directories
+        run: |
+          mkdir -p openwrt
+          chmod -R 777 openwrt
+
       # Copy feeds.conf.default to the openwrt directory
       - name: Copy feeds.conf.default
         run: cp feeds.conf.default openwrt/feeds.conf.default
