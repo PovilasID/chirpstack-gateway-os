@@ -45,3 +45,11 @@ jobs:
       # Initialize quilt
       - name: Initialize quilt
         run: docker compose run --rm chirpstack-gateway-os quilt init
+
+      - name: Open Openwrt
+        run: cd openwrt
+
+      - name: Make config
+        run: make openwrt-menuconfig
+        
+
