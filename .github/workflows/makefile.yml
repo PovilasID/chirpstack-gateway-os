@@ -31,10 +31,10 @@ jobs:
       - name: Configure git safe directory
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       # Step 3: Initialize and update OpenWrt feeds
-      - name: Initialize and update feeds
-        run: |
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a
+      # - name: Initialize and update feeds
+      #   run: |
+      #     ./scripts/feeds update -a
+      #     ./scripts/feeds install -a
       - name: Debug directory structure and permissions
         run: |
           ls -l openwrt
