@@ -45,7 +45,11 @@ jobs:
       # Initialize quilt
       - name: Initialize quilt
         run: docker compose run --rm chirpstack-gateway-os quilt init
-
+      # Ensure necessary directories exist and set permissions
+      - name: Prepare OpenWrt directories
+        run: |
+          chown -R $USER:$USER openwrt
+          chmod -R 777 openwrt
       # Open the OpenWrt menuconfig
       - name: Open OpenWrt menuconfig
         run: |
