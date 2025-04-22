@@ -22,7 +22,10 @@ jobs:
           
       - name: Initialize submodules
         run: git submodule update --init --recursive
-
+        
+      # Set permissions for openwrt directory
+      - name: Set permissions for the openwrt directory
+        run: sudo chown -R $USER:$USER openwrt
       # - name: Install build dependencies
       #   run: |
       #     sudo apt update
