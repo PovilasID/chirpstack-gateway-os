@@ -47,16 +47,16 @@ jobs:
       - name: Initialize quilt
         run: docker compose run --rm chirpstack-gateway-os quilt init
 
-      # Open the OpenWrt menuconfig
-      - name: Open OpenWrt menuconfig
+      # Install build dependencies
+      - name: Install build dependencies
         run: |
-          cd openwrt
-          sudo make
+          sudo apt-get update
+          sudo apt-get install -y build-essential clang flex bison g++ gawk gcc gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget python3
 
       # Build OpenWrt
       - name: Build OpenWrt
         run: |
           cd openwrt
-          make -j$(nproc) FORCE=1
+          make -j1 V=s
 
 
