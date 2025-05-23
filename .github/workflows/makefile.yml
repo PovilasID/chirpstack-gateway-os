@@ -57,6 +57,6 @@ jobs:
       - name: Build OpenWrt
         run: |
           cd openwrt
-          make -j1 V=s
+          make make -j$(nproc) FORCE=1 V=s
 
 
