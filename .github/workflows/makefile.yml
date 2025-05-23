@@ -33,8 +33,9 @@ jobs:
       # Create symbolic links for configuration files
       - name: Create symbolic links
         run: |
-          ln -sf ../conf/.config openwrt/.config
-          ln -sf ../conf/files openwrt/files
+          ln -sf ../conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
+          ln -sf ../conf/full_raspberrypi_bcm27xx_bcm2709/files openwrt/.config
+          ln -sf ../conf/full_raspberrypi_bcm27xx_bcm2709/patches openwrt/.config
 
       # Update and install OpenWrt feeds
       - name: Update and install OpenWrt feeds
@@ -50,6 +51,6 @@ jobs:
       - name: Open OpenWrt menuconfig
         run: |
           cd openwrt
-          sudo make menuconfig
+          sudo make 
         
 
