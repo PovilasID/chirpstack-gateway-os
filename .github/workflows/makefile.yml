@@ -33,9 +33,9 @@ jobs:
       # Create symbolic links for configuration files
       - name: Create symbolic links
         run: |
-          ln -sf ../conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
-          ln -sf ../conf/full_raspberrypi_bcm27xx_bcm2709/files openwrt/files
-          ln -sf ../conf/full_raspberrypi_bcm27xx_bcm2709/patches openwrt/patches
+          docker compose run --rm chirpstack-gateway-os ln -sf ../conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
+          docker compose run --rm chirpstack-gateway-os ln -sf ../conf/full_raspberrypi_bcm27xx_bcm2709/files openwrt/files
+          docker compose run --rm chirpstack-gateway-os ln -sf ../conf/full_raspberrypi_bcm27xx_bcm2709/patches openwrt/patches
 
       # Update and install OpenWrt feeds
       - name: Update and install OpenWrt feeds
