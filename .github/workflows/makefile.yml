@@ -62,7 +62,7 @@ jobs:
       - name: Build OpenWrt
         run: |
           cd openwrt
-          make prereq
+          make init
           make -j1 FORCE=1 V=s
 
 
