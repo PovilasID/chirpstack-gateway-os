@@ -62,6 +62,7 @@ jobs:
       - name: Build OpenWrt
         run: |
           cd openwrt
-          sudo make -j1 FORCE=1 V=s
+          make prereq
+          make -j1 FORCE=1 V=s
 
 
