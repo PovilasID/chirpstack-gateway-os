@@ -62,7 +62,9 @@ jobs:
       - name: Build OpenWrt
         run: |
           cd openwrt
-          make init
+          mv staging_dir/host/.prereq-build staging_dir/host/.prereq-build.old
+          make prereq
+          ls -la staging_dir/host/bin/python3*
           make -j1 FORCE=1 V=s
 
 
