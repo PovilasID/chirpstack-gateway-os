@@ -38,6 +38,10 @@ jobs:
       # Copy .config for OpenWrt
       - name: Copy .config for OpenWrt
         run: |
+          docker compose run --rm chirpstack-gateway-os ls -la ../
+      # Copy .config for OpenWrt
+      - name: Copy .config for OpenWrt
+        run: |
           docker compose run --rm chirpstack-gateway-os cp ../conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
       # Update and install OpenWrt feeds
       - name: Update and install OpenWrt feeds
