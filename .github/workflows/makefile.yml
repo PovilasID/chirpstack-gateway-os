@@ -57,5 +57,9 @@ jobs:
       - name: Build OpenWrt
         run: |
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make -j1 V=s"
+      - name: List openwrt directory inside container
+        run: docker compose run --rm chirpstack-gateway-os ls -l openwrt
+      - name: Show .config contents inside container
+        run: docker compose run --rm chirpstack-gateway-os cat openwrt/.config
 
 
