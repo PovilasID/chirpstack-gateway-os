@@ -32,7 +32,11 @@ jobs:
       # Copy feeds.conf.default to the openwrt directory
       - name: Copy .conf
         run: cp ./conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
-
+      # Ensure necessary directories exist and set permissions
+      - name: Prepare OpenWrt directories
+        run: |
+          mkdir -p openwrt
+          chmod -R 777 .
       # # Create symbolic links for configuration files
       # - name: Create symbolic links
       #   run: |
