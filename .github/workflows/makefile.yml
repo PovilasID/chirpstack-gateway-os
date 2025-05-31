@@ -39,7 +39,7 @@ jobs:
       # Copy .config for OpenWrt
       - name: List files for OpenWrt
         run: |
-          docker compose run --rm chirpstack-gateway-os ls -la ./
+          docker compose run --rm chirpstack-gateway-os ls -la ./openwrt
 
       - name: Update and install OpenWrt feeds
         run: |
@@ -48,7 +48,7 @@ jobs:
 
       # Initialize quilt
       - name: Initialize quilt
-        run: docker compose run --rm chirpstack-gateway-os quilt init
+        run: docker compose run --rm chirpstack-gateway-os sudo quilt init
 
       # Clean OpenWrt build directory (optional)
       # - name: Clean OpenWrt build directory
