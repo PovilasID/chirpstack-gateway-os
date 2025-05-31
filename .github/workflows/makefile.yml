@@ -33,18 +33,14 @@ jobs:
       # Create symbolic links for configuration files
       - name: Create symbolic links
         run: |
-          docker compose run --rm chirpstack-gateway-os ln -sf ./conf/full_raspberrypi_bcm27xx_bcm2709/files openwrt/.config
+          docker compose run --rm chirpstack-gateway-os ln -sf ./conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
           docker compose run --rm chirpstack-gateway-os ln -sf ./conf/full_raspberrypi_bcm27xx_bcm2709/files openwrt/files
           docker compose run --rm chirpstack-gateway-os ln -sf ./conf/full_raspberrypi_bcm27xx_bcm2709/patches openwrt/patches
       # Copy .config for OpenWrt
-      - name: Copy .config for OpenWrt
+      - name: List files for OpenWrt
         run: |
           docker compose run --rm chirpstack-gateway-os ls -la ./
-      # Copy .config for OpenWrt
-      # - name: Copy .config for OpenWrt
-      #   run: |
-      #     docker compose run --rm chirpstack-gateway-os cp ./conf/full_raspberrypi_bcm27xx_bcm2709/.config ./openwrt/.config
-      # Update and install OpenWrt feeds
+
       - name: Update and install OpenWrt feeds
         run: |
           docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds update -a
@@ -55,12 +51,12 @@ jobs:
         run: docker compose run --rm chirpstack-gateway-os quilt init
 
       # Clean OpenWrt build directory (optional)
-      - name: Clean OpenWrt build directory
-        run: |
-          cd openwrt
-          make distclean || true
-      - name: List openwrt directory inside container
-        run: docker compose run --rm chirpstack-gateway-os ls -la openwrt 
+      # - name: Clean OpenWrt build directory
+      #   run: |
+      #     cd openwrt
+      #     make distclean || true
+      # - name: List openwrt directory inside container
+      #   run: docker compose run --rm chirpstack-gateway-os ls -la openwrt 
       # - name: Show .config contents inside container
       #   run: docker compose run --rm chirpstack-gateway-os cat openwrt/.config
       # Build OpenWrt inside Docker
