@@ -64,6 +64,8 @@ jobs:
       # Build OpenWrt inside Docker
       - name: Build OpenWrt
         run: |
-          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make switch-env ENV=full_raspberrypi_bcm27xx_bcm2709 && make -j\$(nproc) V=s"
+          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make defconfig -j$(nproc)"
+          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make download -j$(nproc) V=s"
+          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make -j$(nproc)"
 
 
