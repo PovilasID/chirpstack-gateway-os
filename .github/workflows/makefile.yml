@@ -25,11 +25,14 @@ jobs:
         run: |
           mkdir -p openwrt
           chmod -R 777 .
-
+          
       # Copy feeds.conf.default to the openwrt directory
       - name: Copy feeds.conf.default
         run: cp feeds.conf.default openwrt/feeds.conf.default
       # Copy feeds.conf.default to the openwrt directory
+      - name: Stop check_signature
+        run: |
+          sed -i 's/option check_signature/# option check_signature/g' openwrt/package/system/opkg/Makefile
       - name: Copy .conf
         run: cp ./conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
       # Ensure necessary directories exist and set permissions
