@@ -59,7 +59,7 @@ jobs:
           cd openwrt
           make distclean || true
       - name: List openwrt directory inside container
-        run: docker compose run --rm chirpstack-gateway-os ls -l openwrt
+        run: docker compose run --rm chirpstack-gateway-os ls -la openwrt 
       # - name: Show .config contents inside container
       #   run: docker compose run --rm chirpstack-gateway-os cat openwrt/.config
       # Build OpenWrt inside Docker
