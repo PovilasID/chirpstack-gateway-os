@@ -24,7 +24,7 @@ jobs:
       - name: Prepare OpenWrt directories
         run: |
           mkdir -p openwrt
-          chmod -R 777 openwrt
+          chmod -R 777 .
 
       # Copy feeds.conf.default to the openwrt directory
       - name: Copy feeds.conf.default
