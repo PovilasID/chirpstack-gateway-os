@@ -29,9 +29,9 @@ jobs:
       # Copy feeds.conf.default to the openwrt directory
       - name: Copy feeds.conf.default
         run: cp feeds.conf.default openwrt/feeds.conf.default
-      # # Copy feeds.conf.default to the openwrt directory
-      # - name: Copy .conf
-      #   run: cp ./conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
+      # Copy feeds.conf.default to the openwrt directory
+      - name: Copy .conf
+        run: cp ./conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
 
       # # Create symbolic links for configuration files
       # - name: Create symbolic links
@@ -51,6 +51,7 @@ jobs:
       - name: Initialize quilt
         run: docker compose run --rm chirpstack-gateway-os quilt init
 
+
       # Clean OpenWrt build directory (optional)
       # - name: Clean OpenWrt build directory
       #   run: |
@@ -63,6 +64,6 @@ jobs:
       # Build OpenWrt inside Docker
       - name: Build OpenWrt
         run: |
-          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make devshell && make switch-env ENV=full_raspberrypi_bcm27xx_bcm2709 && make -j\$(nproc) V=s"
+          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make switch-env ENV=full_raspberrypi_bcm27xx_bcm2709 && make -j\$(nproc) V=s"
 
 
