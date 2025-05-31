@@ -3,5 +3,5 @@ src-git luci https://git.openwrt.org/project/luci.git^2ac26e56cc55102cb10e7b0867
 src-git routing https://git.openwrt.org/feed/routing.git^c9b636698881059a3c981032770968f5a98ff201
 src-link chirpstack /workdir/feeds/chirpstack-openwrt-feed
 src/gz IceG_repo https://github.com/4IceG/Modem-extras/raw/main/myrepo
-src/gz custom_generic https://raw.githubusercontent.com/lrdrdn/my-opkg-repo/main/generic
-src/gz custom_arch https://raw.githubusercontent.com/lrdrdn/my-opkg-repo/main/aarch64_cortex-a72
+src/gz custom_generic https://raw.githubusercontent.com/lrdrdn/my-opkg-repo/main/generic;no-check-certificate
+src/gz custom_arch https://raw.githubusercontent.com/lrdrdn/my-opkg-repo/main/aarch64_cortex-a72;no-check-certificate
