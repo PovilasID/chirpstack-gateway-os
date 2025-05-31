@@ -61,6 +61,6 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ipq807x-images
-          path: bin/targets/
+          name: full_raspberrypi_bcm27xx_bcm2709
+          path: openwrt/bin/targets/bcm27xx/bcm2709
 
