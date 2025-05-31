@@ -37,14 +37,6 @@ jobs:
         run: |
           mkdir -p openwrt
           chmod -R 777 .
-      # # Create symbolic links for configuration files
-      # - name: Create symbolic links
-      #   run: |
-      #     docker compose run --rm chirpstack-gateway-os ln -sf ./conf/full_raspberrypi_bcm27xx_bcm2709/files openwrt/files
-      #     docker compose run --rm chirpstack-gateway-os ln -sf ./conf/full_raspberrypi_bcm27xx_bcm2709/patches openwrt/patches
-      #     docker compose run --rm chirpstack-gateway-os ln -sf ./.pio .pio
-      # # Copy .config for OpenWrt
-
 
       - name: Update and install OpenWrt feeds
         run: |
@@ -56,20 +48,19 @@ jobs:
         run: docker compose run --rm chirpstack-gateway-os quilt init
 
 
-      # Clean OpenWrt build directory (optional)
-      # - name: Clean OpenWrt build directory
-      #   run: |
-      #     cd openwrt
-      #     make distclean || true
-      # - name: List openwrt directory inside container
-      #   run: docker compose run --rm chirpstack-gateway-os ls -la openwrt 
-      # - name: Show .config contents inside container
-      #   run: docker compose run --rm chirpstack-gateway-os cat openwrt/.config
-      # Build OpenWrt inside Docker
       - name: Build OpenWrt
         run: |
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make defconfig -j$(nproc)"
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make download -j$(nproc) V=s"
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make -j$(nproc)"
 
+      # List contents of targets folder and all subfolders
+      - name: List OpenWrt build output (targets)
+        run: |
+          ls -lR openwrt/bin/targets
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipq807x-images
+          path: bin/targets/
 
