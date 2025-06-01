@@ -5,3 +5,6 @@
 [submodule "feeds/chirpstack-openwrt-feed"]
 	path = feeds/chirpstack-openwrt-feed
 	url = https://github.com/chirpstack/chirpstack-openwrt-feed.git
+[submodule "feeds/modem-extras"]
+	path = feeds/modem-extras
+	url = https://github.com/4IceG/Modem-extras.git
