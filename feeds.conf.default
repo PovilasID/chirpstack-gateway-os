@@ -4,4 +4,3 @@ src-git routing https://git.openwrt.org/feed/routing.git^c9b636698881059a3c98103
 src-link chirpstack /workdir/feeds/chirpstack-openwrt-feed
 src-link IceG_feed /workdir/feeds/modem-extras
 src-link custom_generic /workdir/feeds/xmm-modem
-src-link custom_aarch64_cortex-a72 /workdir/feeds/xmm-modem/aarch64_cortex-a72
