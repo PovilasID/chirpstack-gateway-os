@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: write
+env:
+  ENV: full_raspberrypi_bcm27xx_bcm2709
 
 jobs:
   init-openwrt:
@@ -26,21 +28,6 @@ jobs:
           mkdir -p openwrt
           chmod -R 777 .
           
-      # Copy feeds.conf.default to the openwrt directory
-      - name: Copy feeds.conf.default
-        run: cp feeds.conf.default openwrt/feeds.conf.default
-      # Copy feeds.conf.default to the openwrt directory
-      - name: Stop check_signature
-        run: |
-          sed -i 's/option check_signature/# option check_signature/g' openwrt/package/system/opkg/Makefile
-          cat openwrt/package/system/opkg/Makefile
-      # - name: Copy .conf
-      #   run: cp ./conf/full_raspberrypi_bcm27xx_bcm2709/.config openwrt/.config
-      # Ensure necessary directories exist and set permissions
-      - name: Prepare OpenWrt directories
-        run: |
-          mkdir -p openwrt
-          chmod -R 777 .
 
       - name: Update and install OpenWrt feeds
         run: |
@@ -50,12 +37,27 @@ jobs:
       # Initialize quilt
       - name: Initialize quilt
         run: docker compose run --rm chirpstack-gateway-os quilt init
+      # Initialize quilt
+      - name: Run quilt
+        run: docker compose run --rm chirpstack-gateway-os cd openwrt && quilt pop -a
 
-
+      # Copy feeds.conf.default to the openwrt directory
+      - name: Swtiching config to full_raspberrypi_bcm27xx_bcm2709
+        run: |
+          rm -f conf/files conf/patches conf/.config
+          ln -s ${ENV}/files conf/files
+          ln -s ${ENV}/patches conf/patches
+          ln -s ${ENV}/.config conf/.config
+      - name: Apply patches using quilt
+        run: |
+          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && quilt push -a"
+    
+      # # Copy feeds.conf.default to the openwrt directory
+      # - name: Copy feeds.conf.default
+      #   run: cp feeds.conf.default openwrt/feeds.conf.default
       - name: Build OpenWrt
         run: |
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make defconfig -j$(nproc)"
-          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make switch-env ENV=full_raspberrypi_bcm27xx_bcm2709 -j1 V=s"
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make download -j$(nproc) V=s"
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make -j$(nproc)"
 
