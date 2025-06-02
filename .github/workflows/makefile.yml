@@ -51,7 +51,7 @@ jobs:
       # List contents of targets folder and all subfolders
       - name: List OpenWrt folder contents
         run: |
-          ls -lR openwrt
+          ls -lR .
           echo ${ENV}
       - name: Apply patches using quilt
         run: |
