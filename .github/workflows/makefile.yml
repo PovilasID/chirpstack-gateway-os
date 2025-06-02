@@ -45,9 +45,9 @@ jobs:
       - name: Swtiching config to full_raspberrypi_bcm27xx_bcm2709
         run: |
           rm -f conf/files conf/patches conf/.config
-          ln -s full_raspberrypi_bcm27xx_bcm2709/files conf/files
-          ln -s full_raspberrypi_bcm27xx_bcm2709/patches conf/patches
-          cp full_raspberrypi_bcm27xx_bcm2709/.config conf/.config
+          ln -s conf/full_raspberrypi_bcm27xx_bcm2709/files conf/files
+          ln -s conf/full_raspberrypi_bcm27xx_bcm2709/patches conf/patches
+          cp conf/full_raspberrypi_bcm27xx_bcm2709/.config conf/.config
       # List contents of targets folder and all subfolders
       - name: List OpenWrt folder contents
         run: |
