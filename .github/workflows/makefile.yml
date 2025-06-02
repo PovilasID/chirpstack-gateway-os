@@ -48,6 +48,13 @@ jobs:
           ln -s ${ENV}/files conf/files
           ln -s ${ENV}/patches conf/patches
           ln -s ${ENV}/.config conf/.config
+
+      # Ensure necessary directories exist and set permissions
+      - name: Prepare OpenWrt directories
+        run: |
+          mkdir -p openwrt
+          chmod -R 777 .
+
       - name: Apply patches using quilt
         run: |
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && quilt push -a"
