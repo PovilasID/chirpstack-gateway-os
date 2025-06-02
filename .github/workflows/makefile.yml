@@ -49,15 +49,9 @@ jobs:
           ln -s ${ENV}/patches conf/patches
           ln -s ${ENV}/.config conf/.config
 
-      # Ensure necessary directories exist and set permissions
-      - name: Chmod workdri
-        run: |
-          sudo chown -R $USER:$GROUP .
-          sudo chmod -R 777 .
-
       - name: Apply patches using quilt
         run: |
-          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && quilt push -a"
+          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os bash -c "cd openwrt && quilt push -a"
     
       # # Copy feeds.conf.default to the openwrt directory
       # - name: Copy feeds.conf.default
