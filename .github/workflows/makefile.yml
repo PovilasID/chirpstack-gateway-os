@@ -52,7 +52,7 @@ jobs:
       # Ensure necessary directories exist and set permissions
       - name: Chmod workdri
         run: |
-          chmod -R 777 .
+          sudo chmod -R 777 .
 
       - name: Apply patches using quilt
         run: |
