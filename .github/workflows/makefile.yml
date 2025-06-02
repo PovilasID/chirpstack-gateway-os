@@ -52,6 +52,7 @@ jobs:
       # Ensure necessary directories exist and set permissions
       - name: Chmod workdri
         run: |
+          sudo chown -R $USER:$USER .pc
           sudo chmod -R 777 .
 
       - name: Apply patches using quilt
