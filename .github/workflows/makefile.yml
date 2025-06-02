@@ -57,7 +57,7 @@ jobs:
 
       - name: Apply patches using quilt
         run: |
-          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && quilt push -a"
+          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && sudo quilt push -a"
     
       # # Copy feeds.conf.default to the openwrt directory
       # - name: Copy feeds.conf.default
