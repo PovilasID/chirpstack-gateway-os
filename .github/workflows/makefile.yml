@@ -48,7 +48,11 @@ jobs:
           ln -s ${ENV}/files conf/files
           ln -s ${ENV}/patches conf/patches
           ln -s ${ENV}/.config conf/.config
-
+      # List contents of targets folder and all subfolders
+      - name: List OpenWrt folder contents
+        run: |
+          ls -lR openwrt
+          echo ${ENV}
       - name: Apply patches using quilt
         run: |
           docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os bash -c "cd openwrt && quilt push -a"
