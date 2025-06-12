@@ -45,9 +45,9 @@ jobs:
       - name: Swtiching config to full_raspberrypi_bcm27xx_bcm2709
         run: |
           rm -f conf/files conf/patches conf/.config
-          docker compose run --rm chirpstack-gateway-os "ln -s ${ENV}/files conf/files"
-          docker compose run --rm chirpstack-gateway-os "ln -s ${ENV}/patches conf/patches"
-          docker compose run --rm chirpstack-gateway-os "cp conf/${ENV}/.config conf/.config"
+          ln -s ../conf/${ENV}/files openwrt/conf/files
+          ln -s ../conf/${ENV}/patches openwrt/conf/patches
+          cp ../conf/${ENV}/.config openwrt/conf/.config
       # List contents of targets folder and all subfolders
       - name: List OpenWrt folder contents
         run: |
