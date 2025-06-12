@@ -51,9 +51,9 @@ jobs:
         run: |
           ls -lR .
           echo "${ENV}"
-      - name: Apply patches using quilt
-        run: |
-          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os bash -c "cd openwrt && quilt push -a"
+      # - name: Apply patches using quilt
+      #   run: |
+      #     docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os bash -c "cd openwrt && quilt push -a"
     
       # # Copy feeds.conf.default to the openwrt directory
       # - name: Copy feeds.conf.default
