@@ -47,7 +47,7 @@ jobs:
           rm -f conf/files conf/patches conf/.config
           ln -sf ${ENV}/files conf/files
           ln -sf ${ENV}/patches conf/patches
-          cp ${ENV}/.config openwrt/conf/.config
+          cp conf/${ENV}/.config openwrt/conf/.config
       # List contents of targets folder and all subfolders
       - name: List OpenWrt folder contents
         run: |
