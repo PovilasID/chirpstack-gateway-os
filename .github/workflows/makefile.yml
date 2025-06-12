@@ -44,10 +44,8 @@ jobs:
       # Copy feeds.conf.default to the openwrt directory
       - name: Swtiching config to full_raspberrypi_bcm27xx_bcm2709
         run: |
-          rm -f conf/files conf/patches conf/.config
-          ln -sf ${ENV}/files conf/files
-          ln -sf ${ENV}/patches conf/patches
-          cp conf/${ENV}/.config openwrt/conf/.config
+          docker compose run --rm chirpstack-gateway-os make switch-env ENV=base_raspberrypi_bcm27xx_bcm2709
+
       # List contents of targets folder and all subfolders
       - name: List OpenWrt folder contents
         run: |
