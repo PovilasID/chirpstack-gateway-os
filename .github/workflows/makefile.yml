@@ -72,5 +72,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: full_raspberrypi_bcm27xx_bcm2709
-          path: openwrt/bin/targets/bcm27xx/bcm2709
+          path: openwrt/bin/targets/
+          # path: openwrt/bin/targets/bcm27xx/bcm2709
 
