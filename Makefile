@@ -10,8 +10,9 @@ init:
 	git submodule init
 	git submodule update
 	cp feeds.conf.default openwrt/feeds.conf.default
-	ln -sf ../conf/.config openwrt/.config
-	ln -sf ../conf/files openwrt/files
+	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/etc/opkg/keys/IceG-repo.pub
+	ln -s ../conf/.config openwrt/.config
+	ln -s ../conf/files openwrt/files
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds update -a
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds install -a
 	docker compose run --rm chirpstack-gateway-os quilt init
@@ -20,6 +21,7 @@ init:
 update:
 	git submodule update
 	cp feeds.conf.default openwrt/feeds.conf.default
+	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/etc/opkg/keys/IceG-repo.pub
 	cd openwrt && \
 		./scripts/feeds update -a && \
 		./scripts/feeds install -a
