@@ -45,7 +45,11 @@ jobs:
       # Patch remove quilt
       # - name: Run quilt
       #   run: docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && quilt pop -a"
-
+      - name: List Docker images and containers
+        run: |
+          docker images
+          docker ps -a
+          
       # Copy feeds.conf.default to the openwrt directory
       - name: Swtiching config to full_raspberrypi_bcm27xx_bcm2709
         run: |
