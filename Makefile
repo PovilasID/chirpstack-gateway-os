@@ -40,7 +40,7 @@ switch-env:
 	-cd openwrt && quilt pop -a
 
 	@echo "Switching configuration"
-	rm -f conf/files conf/patches conf/.config
+	rm -rf conf/files conf/patches conf/.config
 	ln -s ${ENV}/files conf/files
 	ln -s ${ENV}/patches conf/patches
 	ln -s ${ENV}/.config conf/.config
