@@ -53,7 +53,7 @@ jobs:
       # Copy feeds.conf.default to the openwrt directory
       - name: Switching config to full_raspberrypi_bcm27xx_bcm2709
         run: |
-          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os-chirpstack-gateway-os make switch-env ENV=${ENV}
+          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os make switch-env ENV=${ENV}
 
       # - name: Swtiching config to ${ENV}
       #   run: |
