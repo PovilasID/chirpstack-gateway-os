@@ -47,14 +47,14 @@ jobs:
       #   run: docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && quilt pop -a"
 
       # Copy feeds.conf.default to the openwrt directory
-      # - name: Swtiching config to full_raspberrypi_bcm27xx_bcm2709
-      #   run: |
-      #     docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os make switch-env ENV=${ENV}
-
-      - name: Swtiching config to ${ENV}
+      - name: Swtiching config to full_raspberrypi_bcm27xx_bcm2709
         run: |
-          make devshell
-          make switch-env ENV=${ENV}
+          docker compose run --rm -e ENV=${ENV}  --user $(id -u):$(id -g) chirpstack-gateway-os "make switch-env ENV=\$ENV"
+
+      # - name: Swtiching config to ${ENV}
+      #   run: |
+      #     make devshell
+      #     make switch-env ENV=${ENV}
 
       # List contents of targets folder and all subfolders
       - name: List OpenWrt folder contents
