@@ -9,11 +9,12 @@ on:
 permissions:
   contents: write
 env:
-  ENV: full_raspberrypi_bcm27xx_bcm2709
+  ENV: base_raspberrypi_bcm27xx_bcm2709
 
 jobs:
   init-openwrt:
     runs-on: ubuntu-latest
+    timeout-minutes: 480
 
     steps:
       # Checkout the repository
@@ -62,7 +63,7 @@ jobs:
         run: |
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make defconfig -j$(nproc)"
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make download -j$(nproc) V=s"
-          docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make -j$(nproc)"
+          docker compose run --rm chirpstack-gateway-os bash -c "make -j$(nproc)"
 
       # List contents of targets folder and all subfolders
       - name: List OpenWrt build output (targets)
