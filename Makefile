@@ -12,6 +12,7 @@ init:
 	cp feeds.conf.default openwrt/feeds.conf.default
 	mkdir -p conf/files/etc/opkg/keys
 	cp -f feeds/modem-extras/myrepo/IceG-repo.pub conf/files/etc/opkg/keys/IceG-repo.pub
+	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
 	ln -s ../conf/.config openwrt/.config
 	ln -s ../conf/files openwrt/files
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds update -a
