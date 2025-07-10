@@ -10,11 +10,11 @@ init:
 	git submodule init
 	git submodule update
 	cp feeds.conf.default openwrt/feeds.conf.default
+	ln -s ../conf/.config openwrt/.config
+	ln -s ../conf/files openwrt/files
 	mkdir -p conf/files/etc/opkg/keys
 	cp -f feeds/modem-extras/myrepo/IceG-repo.pub conf/files/etc/opkg/keys/IceG-repo.pub
 	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
-	ln -s ../conf/.config openwrt/.config
-	ln -s ../conf/files openwrt/files
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds update -a
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds install -a
 	docker compose run --rm chirpstack-gateway-os quilt init
@@ -24,6 +24,7 @@ update:
 	git submodule update
 	cp feeds.conf.default openwrt/feeds.conf.default
 	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/etc/opkg/keys/IceG-repo.pub
+	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
 	cd openwrt && \
 		./scripts/feeds update -a && \
 		./scripts/feeds install -a
@@ -39,10 +40,15 @@ switch-env:
 	-cd openwrt && quilt pop -a
 
 	@echo "Switching configuration"
-	rm -rf conf/files conf/patches conf/.config
+	rm -f conf/files conf/patches conf/.config
 	ln -s ${ENV}/files conf/files
 	ln -s ${ENV}/patches conf/patches
 	ln -s ${ENV}/.config conf/.config
+
+	@echo "Adding custom feeds"
+	mkdir -p conf/files/etc/opkg/keys
+	cp -f feeds/modem-extras/myrepo/IceG-repo.pub conf/files/etc/opkg/keys/IceG-repo.pub
+	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
 
 	@echo "Applying patches"
 	cd openwrt && quilt push -a
