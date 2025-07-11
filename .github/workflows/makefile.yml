@@ -14,7 +14,7 @@ env:
 jobs:
   init-openwrt:
     runs-on: ubuntu-latest
-    timeout-minutes: 480
+    timeout-minutes: 720
 
     steps:
       # Checkout the repository
@@ -75,7 +75,7 @@ jobs:
         run: |
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make defconfig -j$(nproc)"
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make download -j$(nproc) V=s"
-          docker compose run --rm chirpstack-gateway-os bash -c "make -j$(nproc)"
+          docker compose run --rm chirpstack-gateway-os bash -c "make -j$(nproc) V=s"
 
       # List contents of targets folder and all subfolders
       - name: List OpenWrt build output (targets)
