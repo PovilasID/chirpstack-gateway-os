@@ -32,7 +32,7 @@ update:
 	mkdir -p conf/files/etc/opkg
 	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
 	mkdir -p conf/files/etc/opkg
-	cp -f 99_add_IcedG_repo_key conf/files/etc/uci-defaults/99_add_IcedG_repo_key
+# 	cp -f 99_add_IcedG_repo_key conf/files/etc/uci-defaults/99_add_IcedG_repo_key
 	mkdir -p conf/files/tmp
 	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/tmp/IceG-repo.pub
 
@@ -58,7 +58,7 @@ switch-env:
 	@echo "Adding IceG repository and key public key to be added on first boot"
 	mkdir -p conf/files/etc/opkg
 	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
-	cp -f 99_add_IcedG_repo_key conf/files/etc/uci-defaults/99_add_IcedG_repo_key
+# 	cp -f 99_add_IcedG_repo_key conf/files/etc/uci-defaults/99_add_IcedG_repo_key
 	mkdir -p conf/files/tmp
 	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/tmp/IceG-repo.pub
 
