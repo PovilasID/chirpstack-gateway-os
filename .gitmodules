@@ -11,3 +11,6 @@
 [submodule "feeds/xmm-modem"]
 	path = feeds/xmm-modem
 	url = https://github.com/lrdrdn/my-opkg-repo.git
+[submodule "feeds/modems/luci-app-atcommands"]
+	path = feeds/modems/luci-app-atcommands
+	url = https://github.com/4IceG/luci-app-atcommands.git
