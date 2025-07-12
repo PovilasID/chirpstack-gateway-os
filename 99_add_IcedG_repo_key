@@ -1,0 +1,2 @@
+#!/bin/sh
+opkg-key add /tmp/IceG-repo.pub

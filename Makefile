@@ -10,11 +10,16 @@ init:
 	git submodule init
 	git submodule update
 	cp feeds.conf.default openwrt/feeds.conf.default
+
+	@echo "Adding IceG repository and key public key to be added on first boot"
+	mkdir -p conf/files/etc/opkg
+	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
+	cp -f 99_add_IcedG_repo_key conf/files/etc/uci-defaults/99_add_IcedG_repo_key
+	mkdir -p conf/files/tmp
+	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/tmp/IceG-repo.pub
+	
 	ln -s ../conf/.config openwrt/.config
 	ln -s ../conf/files openwrt/files
-	mkdir -p conf/files/etc/opkg/keys
-	cp -f feeds/modem-extras/myrepo/IceG-repo.pub conf/files/etc/opkg/keys/IceG-repo.pub
-	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds update -a
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds install -a
 	docker compose run --rm chirpstack-gateway-os quilt init
@@ -23,8 +28,13 @@ init:
 update:
 	git submodule update
 	cp feeds.conf.default openwrt/feeds.conf.default
-	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/etc/opkg/keys/IceG-repo.pub
+	@echo "Adding IceG repository and key public key to be added on first boot"
+	mkdir -p conf/files/etc/opkg
 	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
+	cp -f 99_add_IcedG_repo_key conf/files/etc/uci-defaults/99_add_IcedG_repo_key
+	mkdir -p conf/files/tmp
+	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/tmp/IceG-repo.pub
+
 	cd openwrt && \
 		./scripts/feeds update -a && \
 		./scripts/feeds install -a
@@ -44,11 +54,13 @@ switch-env:
 	ln -s ${ENV}/files conf/files
 	ln -s ${ENV}/patches conf/patches
 	ln -s ${ENV}/.config conf/.config
-
-	@echo "Adding custom feeds"
-	mkdir -p conf/files/etc/opkg/keys
-	cp -f feeds/modem-extras/myrepo/IceG-repo.pub conf/files/etc/opkg/keys/IceG-repo.pub
+	@echo "Adding IceG repository and key public key to be added on first boot"
+	mkdir -p conf/files/etc/opkg
 	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
+	cp -f 99_add_IcedG_repo_key conf/files/etc/uci-defaults/99_add_IcedG_repo_key
+	mkdir -p conf/files/tmp
+	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/tmp/IceG-repo.pub
+
 
 	@echo "Applying patches"
 	cd openwrt && quilt push -a
