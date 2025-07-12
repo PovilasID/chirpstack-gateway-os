@@ -9,7 +9,9 @@ build:
 init:
 	git submodule init
 	git submodule update
-	cp feeds.conf.default openwrt/feeds.conf.default
+	cp feeds.conf.default openwrt/feeds.conf.default	
+	ln -s ../conf/.config openwrt/.config
+	ln -s ../conf/files openwrt/files
 
 	@echo "Adding IceG repository and key public key to be added on first boot"
 	mkdir -p conf/files/etc/opkg
@@ -18,8 +20,6 @@ init:
 	mkdir -p conf/files/tmp
 	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/tmp/IceG-repo.pub
 	
-	ln -s ../conf/.config openwrt/.config
-	ln -s ../conf/files openwrt/files
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds update -a
 	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds install -a
 	docker compose run --rm chirpstack-gateway-os quilt init
@@ -31,6 +31,7 @@ update:
 	@echo "Adding IceG repository and key public key to be added on first boot"
 	mkdir -p conf/files/etc/opkg
 	cp -f customfeeds.conf conf/files/etc/opkg/customfeeds.conf
+	mkdir -p conf/files/etc/opkg
 	cp -f 99_add_IcedG_repo_key conf/files/etc/uci-defaults/99_add_IcedG_repo_key
 	mkdir -p conf/files/tmp
 	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/tmp/IceG-repo.pub
