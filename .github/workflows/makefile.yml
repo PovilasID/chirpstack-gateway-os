@@ -65,21 +65,7 @@ jobs:
         run: |
           make init
 
-      # - name: Update and install OpenWrt feeds
-      #   run: |
-      #     docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds update -a
-      #     docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds install -a
 
-      # # Initialize quilt
-      # - name: Initialize quilt
-      #   run: docker compose run --rm chirpstack-gateway-os quilt init
-      # Patch remove quilt
-      # - name: Run quilt
-      #   run: docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && quilt pop -a"
-      - name: List Docker images and containers
-        run: |
-          docker images
-          docker ps -a
 
       # Copy feeds.conf.default to the openwrt directory
       - name: Switching config to full_raspberrypi_bcm27xx_bcm2709
@@ -90,14 +76,6 @@ jobs:
       #   run: |
       #     make devshell &&  make switch-env ENV=${ENV}
 
-      # List contents of targets folder and all subfolders
-      - name: List OpenWrt folder contents
-        run: |
-          ls -lR .
-          echo "${ENV}"
-      # - name: Apply patches using quilt
-      #   run: |
-      #     docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os bash -c "cd openwrt && quilt push -a"
     
       # # Copy feeds.conf.default to the openwrt directory
       # - name: Copy feeds.conf.default
