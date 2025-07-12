@@ -23,6 +23,13 @@ jobs:
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
           sudo docker image prune --all --force
           sudo docker builder prune -a
+          sudo apt-get purge -y openjdk-\* || true
+          sudo apt-get purge -y default-jre default-jdk temurin-\* || true
+          sudo apt-get purge -y mono-complete mono-devel mono-runtime mono-runtime-common mono-runtime-sgen mono-runtime-mono || true
+          sudo apt-get purge -y postgresql\* || true
+          sudo apt-get purge -y firefox\* || true
+          sudo apt-get autoremove -y
+          sudo rm -rf /usr/lib/jvm/temurin*
       - run: df -h
 
       # Checkout the repository
