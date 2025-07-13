@@ -14,7 +14,7 @@ env:
 jobs:
   init-openwrt:
     runs-on: ubuntu-latest
-    timeout-minutes: 1440
+    timeout-minutes: 480
 
     steps:
       - run: df -h
