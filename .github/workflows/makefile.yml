@@ -55,6 +55,16 @@ jobs:
         with:
           submodules: true # Initialize and update submodules
 
+      - name: Cache OpenWrt Build
+        uses: actions/cache@v4
+        with:
+          path: |
+            openwrt/build_dir
+          key: ${{ runner.os }}-openwrt-${{ hashFiles('**/conf/.config') }}
+          restore-keys: |
+            ${{ runner.os }}-openwrt-
+
+
       # Ensure necessary directories exist and set permissions
       - name: Prepare OpenWrt directories
         run: |
