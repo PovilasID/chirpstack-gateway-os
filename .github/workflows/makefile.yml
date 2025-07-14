@@ -92,6 +92,11 @@ jobs:
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make download -j$(nproc) V=s"
           docker compose run --rm chirpstack-gateway-os bash -c "make -j$(nproc) V=s"
 
+      # Ensure necessary directories exist and set permissions
+      - name: Prepare OpenWrt for cache
+        run: |
+          chmod -R 777 openwrt/build_dir
+          
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -179,6 +184,10 @@ jobs:
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make download -j$(nproc) V=s"
           docker compose run --rm chirpstack-gateway-os bash -c "make -j$(nproc) V=s"
 
+      # Ensure necessary directories exist and set permissions
+      - name: Prepare OpenWrt for cache
+        run: |
+          chmod -R 777 openwrt/build_dir          
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
