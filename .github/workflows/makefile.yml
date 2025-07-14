@@ -60,7 +60,7 @@ jobs:
         with:
           path: |
             openwrt/build_dir
-          key: ${{ runner.os }}-openwrt-${{ hashFiles('/conf/.config') }}
+          key: ${{ runner.os }}-openwrt-
           restore-keys: |
             ${{ runner.os }}-openwrt-
 
@@ -147,7 +147,7 @@ jobs:
         with:
           path: |
             openwrt/build_dir
-          key: ${{ runner.os }}-openwrt-${{ hashFiles('**/conf/.config') }}
+          key: ${{ runner.os }}-openwrt-
           restore-keys: |
             ${{ runner.os }}-openwrt-
 
