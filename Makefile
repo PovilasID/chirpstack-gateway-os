@@ -10,8 +10,8 @@ init:
 	git submodule init
 	git submodule update
 	cp feeds.conf.default openwrt/feeds.conf.default	
-	ln -s ../conf/.config openwrt/.config
-	ln -s ../conf/files openwrt/files
+	ln -fs ../conf/.config openwrt/.config
+	ln -fs ../conf/files openwrt/files
 
 	@echo "Adding IceG repository and key public key to be added on first boot"
 	mkdir -p conf/files/etc/opkg
