@@ -173,7 +173,10 @@ jobs:
         run: |
           docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os make switch-env ENV=full_raspberrypi_bcm27xx_bcm2709
 
-
+      - name: Permission fix cashed files 
+        run: |
+          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os sudo chown -R $(id -u):$(id -g) openwrt/build_dir
+          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os sudo cmod 777 openwrt/build_dir
     
       # # Copy feeds.conf.default to the openwrt directory
       # - name: Copy feeds.conf.default
