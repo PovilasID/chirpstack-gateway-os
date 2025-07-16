@@ -93,7 +93,8 @@ jobs:
         run: |
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make defconfig -j$(nproc)"
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make download -j$(nproc) V=s"
-          docker compose run --rm chirpstack-gateway-os bash -c "make -j$(nproc) V=s"
+          docker compose run --rm chirpstack-gateway-os bash -c "export TAR_OPTIONS='--no-same-owner --no-same-permissions' && make -j\$(nproc) V=s"
+
 
       # Ensure necessary directories exist and set permissions
       - name: Prepare OpenWrt for cache
@@ -188,7 +189,8 @@ jobs:
         run: |
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt && make defconfig -j$(nproc)"
           docker compose run --rm chirpstack-gateway-os bash -c "cd openwrt &&  make download -j$(nproc) V=s"
-          docker compose run --rm chirpstack-gateway-os bash -c "make -j$(nproc) V=s"
+          docker compose run --rm chirpstack-gateway-os bash -c "export TAR_OPTIONS='--no-same-owner --no-same-permissions' && make -j\$(nproc) V=s"
+
 
       # Ensure necessary directories exist and set permissions
       - name: Prepare OpenWrt for cache
