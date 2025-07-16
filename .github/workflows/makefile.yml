@@ -191,10 +191,12 @@ jobs:
       - name: Fix TAR_OPTIONS 4 cashing
         run: |
           docker compose run --rm chirpstack-gateway-os bash -c "\
-            grep -q '^TAR_OPTIONS *:=' openwrt/include/download.mk \
-            && sed -i 's/^TAR_OPTIONS.*/TAR_OPTIONS := --no-same-owner --no-same-permissions/' openwrt/include/download.mk \
-            || echo 'TAR_OPTIONS := --no-same-owner --no-same-permissions' >> openwrt/include/download.mk"
-          
+            if grep -q '^TAR_OPTIONS' openwrt/include/download.mk; then \
+              sed -i 's/^TAR_OPTIONS.*/TAR_OPTIONS += --no-same-owner --no-same-permissions/' openwrt/include/download.mk; \
+            else \
+              echo 'TAR_OPTIONS += --no-same-owner --no-same-permissions' >> openwrt/include/download.mk; \
+            fi"
+                    
       # # Copy feeds.conf.default to the openwrt directory
       # - name: Copy feeds.conf.default
       #   run: cp feeds.conf.default openwrt/feeds.conf.default
