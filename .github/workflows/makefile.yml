@@ -76,6 +76,17 @@ jobs:
         run: |
           make init || make init -j1 V=s # Retry with single thread if the first attempt fails
 
+
+      - name: Debug ChirpStack feed error log
+        if: failure()    # <-- runs only if any previous step failed
+        run: |
+          if [ -f openwrt/logs/feeds/chirpstack/chirpstack/chirpstack/dump.txt ]; then
+            echo "Found dump.txt, printing contents:"
+            cat openwrt/logs/feeds/chirpstack/chirpstack/chirpstack/dump.txt
+          else
+            echo "No dump.txt found."
+          fi
+                    
       # Copy feeds.conf.default to the openwrt directory
       - name: Switching config to base_raspberrypi_bcm27xx_bcm2709
         run: |
@@ -178,6 +189,15 @@ jobs:
         run: |
           make init || make init -j1 V=s # Retry with single thread if the first attempt fails
 
+      - name: Debug ChirpStack feed error log
+        if: failure()    # <-- runs only if any previous step failed
+        run: |
+          if [ -f openwrt/logs/feeds/chirpstack/chirpstack/chirpstack/dump.txt ]; then
+            echo "Found dump.txt, printing contents:"
+            cat openwrt/logs/feeds/chirpstack/chirpstack/chirpstack/dump.txt
+          else
+            echo "No dump.txt found."
+          fi
       # Copy feeds.conf.default to the openwrt directory
       - name: Switching config to full_raspberrypi_bcm27xx_bcm2709
         run: |
