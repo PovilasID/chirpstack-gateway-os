@@ -20,8 +20,11 @@ init:
 	mkdir -p conf/files/tmp
 	cp feeds/modem-extras/myrepo/IceG-repo.pub conf/files/tmp/IceG-repo.pub
 
-	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds update -a
-	docker compose run --rm chirpstack-gateway-os openwrt/scripts/feeds install -a
+	docker compose run --rm chirpstack-gateway-os bash -c "\
+		cd openwrt && \
+		./scripts/feeds update -a && \
+		./scripts/feeds install -a \
+	"
 	docker compose run --rm chirpstack-gateway-os quilt init
 
 # Update OpenWrt + package feeds.
