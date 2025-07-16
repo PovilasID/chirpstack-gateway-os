@@ -83,7 +83,7 @@ jobs:
 
       - name: Permission fix cashed files 
         run: |
-          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os chown -R $(id -u):$(id -g) openwrt/build_diropenwrt/build_dir
+          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os chown -R $(id -u):$(id -g) openwrt/build_dir
           docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os cmod 777 openwrt/build_dir
     
       # # Copy feeds.conf.default to the openwrt directory
@@ -178,7 +178,7 @@ jobs:
 
       - name: Permission fix cashed files 
         run: |
-          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os chown -R $(id -u):$(id -g) openwrt/build_diropenwrt/build_dir
+          docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os chown -R $(id -u):$(id -g) openwrt/build_dir
           docker compose run --rm --user $(id -u):$(id -g) chirpstack-gateway-os cmod 777 openwrt/build_dir
     
       # # Copy feeds.conf.default to the openwrt directory
